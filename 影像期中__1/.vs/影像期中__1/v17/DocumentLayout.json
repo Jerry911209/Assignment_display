@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EE8894EF-783B-4A30-B18A-8FCFBCBDBE9E}|\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE8894EF-783B-4A30-B18A-8FCFBCBDBE9E}|\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1.csproj|solutionrelative:\u5F71\u50CF\u671F\u4E2D__1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE8894EF-783B-4A30-B18A-8FCFBCBDBE9E}|\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE8894EF-783B-4A30-B18A-8FCFBCBDBE9E}|\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1.csproj|solutionrelative:\u5F71\u50CF\u671F\u4E2D__1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 139,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-29T01:55:28.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u4E2D__1\\\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml.cs",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u4E2D__1\\MainWindow.xaml.cs",
+              "ViewState": "AQIAALEBAAAAAAAAAAAQwIICAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T01:55:25.735Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 13,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

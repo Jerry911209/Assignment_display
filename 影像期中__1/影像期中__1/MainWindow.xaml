@@ -1,0 +1,55 @@
+﻿<Window x:Class="影像期中__1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:影像期中__1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+    <Grid>
+        <!-- 圍繞 before_image 的 Border 和重疊的 Image -->
+        <Border BorderBrush="Black" BorderThickness="1" Height="280" Width="420" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,68,0,0">
+            <Image x:Name="before_image" Stretch="Uniform" />
+        </Border>
+
+        <!-- 圍繞 after_image 的 Border 和重疊的 Image -->
+        <Border BorderBrush="Black" BorderThickness="1" Height="280" Width="420" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,68,0,0">
+            <Image x:Name="after_image" Stretch="Uniform" />
+        </Border>
+
+        <!-- 按鈕設定 -->
+        <Button x:Name="Lode_image" Content="載入圖片" HorizontalAlignment="Left" Margin="100,378,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="Lode_image_Click"/>
+        <Button x:Name="Gray_transfer" Content="灰階" HorizontalAlignment="Left" Margin="224,378,0,0" VerticalAlignment="Top" Width="86" Click="Gray_transfer_Click"/>
+        <Button x:Name="channel_transfer" Content="通道轉換" HorizontalAlignment="Left" Margin="224,408,0,0" VerticalAlignment="Top" Height="21" Width="86" Click="channel_transfer_Click"/>
+        <TextBlock x:Name="process" HorizontalAlignment="Left" Margin="704,48,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="15" Width="112"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="100" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="455,411,0,0">
+            <Image x:Name="R_image" Stretch="Uniform" />
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Height="100" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="635,411,0,0">
+            <Image x:Name="G_image" Stretch="Uniform" />
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Height="100" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="815,411,0,0">
+            <Image x:Name="B_image" Stretch="Uniform" />
+        </Border>
+        <Slider x:Name="slider_255" HorizontalAlignment="Left" Margin="634,25,0,0" VerticalAlignment="Top" Width="256" Maximum="255" ValueChanged="slider_255_ValueChanged" Value="125"/>
+        <Button x:Name="binarization" Content="2值化" HorizontalAlignment="Left" Margin="225,434,0,0" VerticalAlignment="Top" Height="19" Width="85" Click="binarization_Click"/>
+        <Button x:Name="save" Content="save main after image" HorizontalAlignment="Left" Margin="815,364,0,0" VerticalAlignment="Top" Width="185" Click="save_Click"/>
+        <TextBlock x:Name="value" HorizontalAlignment="Left" Margin="895,22,0,0" TextWrapping="Wrap" Text="125" VerticalAlignment="Top" Height="15" Width="112"/>
+        <Button x:Name="Erode" Content="侵蝕" HorizontalAlignment="Left" Margin="224,458,0,0" VerticalAlignment="Top" Width="86" Click="Erode_Click"/>
+        <Button x:Name="Dilate" Content="擴張" HorizontalAlignment="Left" Margin="224,482,0,0" VerticalAlignment="Top" Width="86" Click="Dilate_Click"/>
+        <Button x:Name="Denoise" Content="去雜訊" HorizontalAlignment="Left" Margin="225,506,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="Denoise_Click"/>
+        <Button x:Name="Sharpen" Content="銳化" HorizontalAlignment="Left" Margin="225,533,0,0" VerticalAlignment="Top" Height="23" Width="85" Click="Sharpen_Click"/>
+        <TextBox HorizontalAlignment="Left" Margin="470,527,0,0" TextWrapping="Wrap" Text="B" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" TextAlignment="Center" />
+        <TextBox HorizontalAlignment="Left" Margin="650,527,0,0" TextWrapping="Wrap" Text="G" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" TextAlignment="Center" />
+        <TextBox HorizontalAlignment="Left" Margin="830,527,0,0" TextWrapping="Wrap" Text="B" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" TextAlignment="Center" />
+        <Button x:Name="edge" Content="邊緣檢測" HorizontalAlignment="Left" Margin="331,409,0,0" VerticalAlignment="Top" Height="19" Width="86" Click="edge_Click"/>
+        <Button x:Name="Histogram" Content="值方圖等化" HorizontalAlignment="Left" Margin="332,434,0,0" VerticalAlignment="Top" Height="19" Width="85" Click="Histogram_Click"/>
+        <Button x:Name="Spin_circles" Content="轉圈圈" HorizontalAlignment="Left" Margin="331,461,0,0" VerticalAlignment="Top" Height="22" Width="83" Click="Spin_circles_Click"/>
+        <Slider x:Name="circles_Slider" HorizontalAlignment="Left" Margin="634,549,0,0" VerticalAlignment="Top" Width="236" Height="26" Maximum="360" ValueChanged="circles_Slider_ValueChanged"/>
+        <TextBlock x:Name="value_circles" HorizontalAlignment="Left" Margin="878,550,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="15" Width="112"/>
+
+
+    </Grid>
+</Window>
