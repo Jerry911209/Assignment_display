@@ -1,0 +1,28 @@
+﻿<Window x:Class="影像期末.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:影像期末"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="682" Width="1116">
+    <Grid>
+       
+        <Border 
+            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="127,54,773,229" Width="216" Height="384
+            ">
+            <MediaElement x:Name="before_media" LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Uniform" MediaOpened="BeforeMedia_MediaOpened"  />
+        </Border>
+        <Border 
+            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="395,60,505,223" Width="216" Height="384             ">
+            <Image x:Name="after_image1" />
+        </Border>
+        <Button x:Name="input_image" Content="導入影像" HorizontalAlignment="Left" Margin="706,77,0,0" VerticalAlignment="Top" Height="30" Width="71" Click="input_image_Click"/>
+        <Button x:Name="Start_image" Content="開始" HorizontalAlignment="Left" Margin="706,123,0,0" VerticalAlignment="Top" Width="71" Height="26" Click="Start_image_Click"/>
+        <Button x:Name="Retrieve_image" Content="擷取" HorizontalAlignment="Left" Margin="706,163,0,0" VerticalAlignment="Top" Height="28" Width="71" Click="Retrieve_image_Click"/>
+        <Border 
+            BorderBrush="Black" BorderThickness="1"  CornerRadius="10"  Margin="826,60,74,223" Width="216" Height="384             ">
+            <Image x:Name="cut_image2"  />
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "\u5F71\u50CF\u671F\u672B",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-22T18:02:06.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Settings.settings",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\Properties\\Settings.settings",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\Properties\\Settings.settings",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2024-12-22T18:04:45.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "\u5F71\u50CF\u671F\u672B",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-22T18:04:39.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-22T15:35:44.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\\u8AB2\u7A0B\\\u5F71\u50CF\u8655\u7406113\u5B78\u5E74\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAG0AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T15:01:07.243Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1061,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
