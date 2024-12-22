@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "gVpaugU19ew=",
+  "dgSpecHash": "mSSURrjx5yU=",
   "success": true,
   "projectFilePath": "C:\\Users\\jerry\\OneDrive\\桌面\\git\\Assignment_display\\影像期末_1\\影像期末\\影像期末\\影像期末.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jerry\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
+    "C:\\Users\\jerry\\.nuget\\packages\\accord.imaging\\3.8.0\\accord.imaging.3.8.0.nupkg.sha512",
+    "C:\\Users\\jerry\\.nuget\\packages\\accord.math\\3.8.0\\accord.math.3.8.0.nupkg.sha512",
+    "C:\\Users\\jerry\\.nuget\\packages\\accord.statistics\\3.8.0\\accord.statistics.3.8.0.nupkg.sha512",
     "C:\\Users\\jerry\\.nuget\\packages\\aforge\\2.2.5\\aforge.2.2.5.nupkg.sha512",
     "C:\\Users\\jerry\\.nuget\\packages\\aforge.imaging\\2.2.5\\aforge.imaging.2.2.5.nupkg.sha512",
     "C:\\Users\\jerry\\.nuget\\packages\\aforge.math\\2.2.5\\aforge.math.2.2.5.nupkg.sha512",

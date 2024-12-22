@@ -62,6 +62,14 @@
               "target": "Package",
               "version": "[2.2.5, )"
             },
+            "Accord": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "Accord.Imaging": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
             "OpenCvSharp4": {
               "target": "Package",
               "version": "[4.10.0.20241108, )"

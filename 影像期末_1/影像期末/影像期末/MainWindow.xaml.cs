@@ -180,28 +180,72 @@ namespace 影像期末
 
             // 高斯模糊
             GaussianBlur blurFilter = new GaussianBlur(2, 5); // 減小核大小
-            Bitmap blurredBitmap = blurFilter.Apply(contrastEnhancedBitmap);        
-           
-            //Sobel
-            Edges edgeFilter = new Edges();
-            Bitmap edgeEnhancedBitmap = edgeFilter.Apply(blurredBitmap);
+            Bitmap blurredBitmap = blurFilter.Apply(contrastEnhancedBitmap);
+
+            ////Sobel
+            //Edges edgeFilter = new Edges();
+            //Bitmap edgeEnhancedBitmap = edgeFilter.Apply(blurredBitmap);
+
+            //拉普拉絲邊緣
+            Bitmap edgeLaplacianBitmap = ApplyLaplacianFilter(blurredBitmap);
 
             // 使用中央加權中值法進一步處理
-            Bitmap centralWeightedBitmap = ApplyCentralWeightedMedianFilter(edgeEnhancedBitmap, 5);
+            Bitmap centralWeightedBitmap = ApplyCentralWeightedMedianFilter(edgeLaplacianBitmap, 5);
 
-            // 使用中值法進一步處理
-            Bitmap medianProcessedBitmap = ApplyMedianFilter(edgeEnhancedBitmap, 3);
+            //// 使用中值法進一步處理
+            //Bitmap medianProcessedBitmap = ApplyMedianFilter(edgeLaplacianBitmap, 3);
 
             // 使用自適應二值化
             Bitmap adaptiveBitmap = ApplyAdaptiveThreshold(centralWeightedBitmap, 11, 2);
 
+            //反轉
             Bitmap invertedBitmap = InvertBrightness(adaptiveBitmap);
 
             // 將結果轉回 BitmapSource
             return BitmapToSource(invertedBitmap);
         }
         // 將中值濾波結果作為遮罩應用到原圖
-       
+
+        private Bitmap ApplyLaplacianFilter(Bitmap grayBitmap)
+        {
+            // 定義 Laplacian 卷積核
+            int[,] laplacianKernel = new int[,]
+            {
+        { 0, -1, 0 },
+        { -1, 4, -1 },
+        { 0, -1, 0 }
+            };
+
+            // 創建結果圖像
+            Bitmap resultBitmap = new Bitmap(grayBitmap.Width, grayBitmap.Height);
+
+            // 遍歷每個像素（跳過邊界像素）
+            for (int y = 1; y < grayBitmap.Height - 1; y++)
+            {
+                for (int x = 1; x < grayBitmap.Width - 1; x++)
+                {
+                    int gradient = 0;
+
+                    // 卷積操作
+                    for (int ky = -1; ky <= 1; ky++)
+                    {
+                        for (int kx = -1; kx <= 1; kx++)
+                        {
+                            int pixelValue = grayBitmap.GetPixel(x + kx, y + ky).R; // 灰階值
+                            gradient += pixelValue * laplacianKernel[ky + 1, kx + 1];
+                        }
+                    }
+
+                    // 將梯度結果限制在 [0, 255]
+                    gradient = Math.Max(0, Math.Min(255, gradient));
+
+                    // 設置結果像素值
+                    resultBitmap.SetPixel(x, y, Drawing.Color.FromArgb(gradient, gradient, gradient));
+                }
+            }
+
+            return resultBitmap;
+        }
 
         //灰階反轉
         private Bitmap ApplyAdaptiveThreshold(Bitmap source, int blockSize, int c)

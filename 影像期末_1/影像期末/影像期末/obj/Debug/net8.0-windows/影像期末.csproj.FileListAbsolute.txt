@@ -61,3 +61,10 @@ C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期�
 C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\obj\Debug\net8.0-windows\影像期末.pdb
 C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\obj\Debug\net8.0-windows\影像期末.genruntimeconfig.cache
 C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\obj\Debug\net8.0-windows\ref\影像期末.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.dll.config
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.Imaging.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.Math.Core.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.Math.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\bin\Debug\net8.0-windows\Accord.Statistics.dll
+C:\Users\jerry\OneDrive\桌面\git\Assignment_display\影像期末_1\影像期末\影像期末\obj\Debug\net8.0-windows\影像期末_Content.g.cs
