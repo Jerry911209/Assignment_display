@@ -185,20 +185,24 @@ namespace 影像期末
             //Sobel
             Edges edgeFilter = new Edges();
             Bitmap edgeEnhancedBitmap = edgeFilter.Apply(blurredBitmap);
-          
-            // 使用自適應二值化
-            Bitmap adaptiveBitmap = ApplyAdaptiveThreshold(edgeEnhancedBitmap, 11, 2);
-
-            // 使用中值法進一步處理
-            Bitmap medianProcessedBitmap = ApplyMedianFilter(adaptiveBitmap, 3);
 
             // 使用中央加權中值法進一步處理
-            Bitmap centralWeightedBitmap = ApplyCentralWeightedMedianFilter(adaptiveBitmap, 3);
+            Bitmap centralWeightedBitmap = ApplyCentralWeightedMedianFilter(edgeEnhancedBitmap, 5);
+
+            // 使用中值法進一步處理
+            Bitmap medianProcessedBitmap = ApplyMedianFilter(edgeEnhancedBitmap, 3);
+
+            // 使用自適應二值化
+            Bitmap adaptiveBitmap = ApplyAdaptiveThreshold(centralWeightedBitmap, 11, 2);
+
+            
+
+            
 
             Bitmap maskedBitmap = ApplyMask(grayBitmap, medianProcessedBitmap);
 
 
-            Bitmap invertedBitmap = InvertBrightness(medianProcessedBitmap);
+            Bitmap invertedBitmap = InvertBrightness(adaptiveBitmap);
 
             // 將結果轉回 BitmapSource
             return BitmapToSource(invertedBitmap);
