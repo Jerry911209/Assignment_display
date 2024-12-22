@@ -195,45 +195,13 @@ namespace 影像期末
             // 使用自適應二值化
             Bitmap adaptiveBitmap = ApplyAdaptiveThreshold(centralWeightedBitmap, 11, 2);
 
-            
-
-            
-
-            Bitmap maskedBitmap = ApplyMask(grayBitmap, medianProcessedBitmap);
-
-
             Bitmap invertedBitmap = InvertBrightness(adaptiveBitmap);
 
             // 將結果轉回 BitmapSource
             return BitmapToSource(invertedBitmap);
         }
         // 將中值濾波結果作為遮罩應用到原圖
-        private Bitmap ApplyMask(Bitmap original, Bitmap mask)
-        {
-            Bitmap result = new Bitmap(original.Width, original.Height);
-
-            for (int y = 0; y < original.Height; y++)
-            {
-                for (int x = 0; x < original.Width; x++)
-                {
-                    // 獲取遮罩像素值
-                    Drawing.Color maskColor = mask.GetPixel(x, y);
-
-                    // 如果遮罩接近白色，保留原圖像素，否則設為黑色
-                    if (maskColor.R > 200) // 判斷是否接近白色
-                    {
-                        Drawing.Color originalColor = original.GetPixel(x, y);
-                        result.SetPixel(x, y, originalColor);
-                    }
-                    else
-                    {
-                        result.SetPixel(x, y, Drawing.Color.Black); // 黑色背景
-                    }
-                }
-            }
-
-            return result;
-        }
+       
 
         //灰階反轉
         private Bitmap ApplyAdaptiveThreshold(Bitmap source, int blockSize, int c)
