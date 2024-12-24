@@ -25,6 +25,7 @@ using Drawing = System.Drawing;
 using System.Collections.Generic;
 using static AForge.Math.FourierTransform;
 using System.Diagnostics;
+using OpenCvSharp;
 
 //Process currentProcess = Process.GetCurrentProcess();
 //currentProcess.PriorityClass = ProcessPriorityClass.High;
@@ -39,7 +40,7 @@ namespace 影像期末
         // 獲取用戶選擇的檔案路徑
         string selectedFile = "";
         private DispatcherTimer frameCaptureTimer; // 用於定時捕捉畫面的計時器
-
+        Bitmap originalBitmap;
         public MainWindow()
         {
             InitializeComponent();
@@ -88,9 +89,9 @@ namespace 影像期末
                 if (File.Exists(selectedFile))
                 {
                     // 設置 MediaElement 的來源
-                    before_media.Source = new Uri(selectedFile, UriKind.Absolute);                  
+                    before_media.Source = new Uri(selectedFile, UriKind.Absolute);
                 }
-               
+
             }
         }
         private void BeforeMedia_MediaOpened(object sender, RoutedEventArgs e)//監聽影片
@@ -139,21 +140,21 @@ namespace 影像期末
         {
             //try
             //{
-                // 渲染 MediaElement 畫面到 RenderTargetBitmap
-                var renderTarget = new RenderTargetBitmap(
-                    (int)before_media.ActualWidth,
-                    (int)before_media.ActualHeight,
-                    96, 96, System.Windows.Media.PixelFormats.Pbgra32);
-                renderTarget.Render(before_media);
+            // 渲染 MediaElement 畫面到 RenderTargetBitmap
+            var renderTarget = new RenderTargetBitmap(
+                (int)before_media.ActualWidth,
+                (int)before_media.ActualHeight,
+                96, 96, System.Windows.Media.PixelFormats.Pbgra32);
+            renderTarget.Render(before_media);
 
-                // 將 RenderTargetBitmap 轉換為 BitmapSource
-                BitmapSource bitmapSource = renderTarget;
+            // 將 RenderTargetBitmap 轉換為 BitmapSource
+            BitmapSource bitmapSource = renderTarget;
+            originalBitmap = BitmapFromSource(bitmapSource);
+            // 使用影像處理方法執行邊緣檢測
+            BitmapSource processedImage = ApplyEdgeDetection(bitmapSource);
 
-                // 使用影像處理方法執行邊緣檢測
-                BitmapSource processedImage = ApplyEdgeDetection(bitmapSource);
-
-                // 將處理後的影像顯示在 after_image1 控件中
-                after_image1.Source = processedImage;
+            // 將處理後的影像顯示在 after_image1 控件中
+            after_image1.Source = processedImage;
             //}
             //catch (Exception ex)
             //{
@@ -168,7 +169,7 @@ namespace 影像期末
         {
             // 將 BitmapSource 轉換為 System.Drawing.Bitmap
             Bitmap bitmap = BitmapFromSource(source);
-            //Bitmap originalBitmap = ;
+
 
             // 將影像轉換為灰階格式
             Grayscale grayscaleFilter = new Grayscale(0.2126, 0.7152, 0.0722); // 使用標準灰階轉換係數
@@ -177,7 +178,7 @@ namespace 影像期末
             // 對比度增強(自適應值方圖)
             HistogramEqualization histogramFilter = new HistogramEqualization();
             Bitmap contrastEnhancedBitmap = histogramFilter.Apply(grayBitmap);
-
+            originalBitmap = contrastEnhancedBitmap;
             // 高斯模糊
             GaussianBlur blurFilter = new GaussianBlur(2, 5); // 減小核大小
             Bitmap blurredBitmap = blurFilter.Apply(contrastEnhancedBitmap);
@@ -201,11 +202,90 @@ namespace 影像期末
             //反轉
             Bitmap invertedBitmap = InvertBrightness(adaptiveBitmap);
 
-            // 將結果轉回 BitmapSource
-            return BitmapToSource(invertedBitmap);
-        }
-        // 將中值濾波結果作為遮罩應用到原圖
 
+
+            // 確保圖像為灰階格式
+            Bitmap grayscaleImage = ConvertToGrayscale(invertedBitmap);
+
+            // 使用膨脹濾鏡修復邊緣
+            Dilatation dilationFilter = new Dilatation();
+            Bitmap resultImage = dilationFilter.Apply(grayscaleImage);
+
+            //resultImage 當遮罩帶回原圖
+            // 將遮罩應用於原圖
+            //Bitmap resultBitmap = ApplyBinaryMaskWithPreservation(originalBitmap, resultImage);
+
+            //擷取ROI(大圖中間1/3)
+            Drawing.Rectangle roi = GetCentralROI(resultImage);
+            Bitmap roiBitmap = CropBitmap(resultImage, roi);
+            //roi中最大連通對應位置畫紅色
+
+            // 將結果轉回 BitmapSource
+            return BitmapToSource(resultImage);
+        }
+        private System.Drawing.Rectangle GetCentralROI(Bitmap image)
+        {
+            // 寬度保持不變
+            int width = image.Width;
+
+            // 高度為原本的 1/3
+            int height = image.Height / 3;
+
+            // 起始點 X 為 0（寬度不變，所以從最左邊開始）
+            int startX = 0;
+
+            // 起始點 Y 保證從圖像高度的中間部分開始
+            int startY = height;
+
+            return new System.Drawing.Rectangle(startX, startY, width, height);
+        }
+
+        private Bitmap CropBitmap(Bitmap source, System.Drawing.Rectangle roi)
+        {
+            // 確保裁剪範圍在影像內
+            if (roi.X < 0 || roi.Y < 0 || roi.X + roi.Width > source.Width || roi.Y + roi.Height > source.Height)
+                throw new ArgumentException("裁剪範圍超出影像邊界");
+
+            // 裁剪區域
+            return source.Clone(roi, source.PixelFormat);
+        }
+
+        //遮罩帶回原圖
+        //private Bitmap ApplyBinaryMaskWithPreservation(Bitmap original, Bitmap binaryMask)
+        //{
+        //    // 確保兩個影像大小一致
+        //    if (original.Width != binaryMask.Width || original.Height != binaryMask.Height)
+        //        throw new ArgumentException("原圖和遮罩的尺寸必須相同。");
+
+        //    Bitmap result = new Bitmap(original.Width, original.Height);
+
+        //    // 使用像素級操作進行處理
+        //    for (int y = 0; y < original.Height; y++)
+        //    {
+        //        for (int x = 0; x < original.Width; x++)
+        //        {
+        //            // 取得原圖與遮罩的像素值
+        //            Drawing.Color originalColor = original.GetPixel(x, y);
+        //            Drawing.Color maskColor = binaryMask.GetPixel(x, y);
+
+        //            // 如果遮罩是白色，保留原圖細節；如果遮罩是黑色，保留原圖暗部
+        //            if (maskColor.R > 128) // 白色（亮部）
+        //            {
+        //                result.SetPixel(x, y, originalColor); // 保留原圖像素
+        //            }
+        //            else // 黑色（暗部）
+        //            {
+        //                // 保持暗部，將像素設為黑色
+        //                result.SetPixel(x, y, Drawing.Color.Black);
+        //            }
+        //        }
+        //    }
+        //    cut_image2.Source = BitmapToSource(result); ;
+        //    return result;
+        //}
+
+
+        // 拉普拉斯
         private Bitmap ApplyLaplacianFilter(Bitmap grayBitmap)
         {
             // 定義 Laplacian 卷積核
@@ -247,7 +327,7 @@ namespace 影像期末
             return resultBitmap;
         }
 
-        //灰階反轉
+        //自適應2值
         private Bitmap ApplyAdaptiveThreshold(Bitmap source, int blockSize, int c)
         {
             if (blockSize % 2 == 0)
@@ -308,6 +388,7 @@ namespace 影像期末
 
             return result;
         }
+        //灰階反轉
         private Bitmap InvertBrightness(Bitmap source)
         {
             Bitmap result = new Bitmap(source.Width, source.Height);
@@ -370,6 +451,7 @@ namespace 影像期末
 
             return result;
         }
+        //中央加權中值法
         private Bitmap ApplyCentralWeightedMedianFilter(Bitmap source, int blockSize)
         {
             if (blockSize % 2 == 0)
@@ -425,7 +507,7 @@ namespace 影像期末
             return result;
         }
 
-        // 生成中央加權矩陣
+        // 中央加權矩陣
         private int[,] GenerateCentralWeights(int blockSize)
         {
             int[,] weights = new int[blockSize, blockSize];
@@ -444,88 +526,14 @@ namespace 影像期末
             return weights;
         }
 
-        private Bitmap HighlightLongestLine(Bitmap binaryBitmap)
+        //8byte轉24
+        private static Bitmap ConvertToGrayscale(Bitmap inputBitmap)
         {
-            // 使用 Drawing.Color
-            Drawing.Color white = Drawing.Color.White;
-
-            // 定義方向向量（8 個方向）
-            int[,] directions = new int[,]
-            {
-        { -1, -1 }, { 0, -1 }, { 1, -1 }, // 左上、上、右上
-        { -1,  0 },          { 1,  0 },  // 左、中、右
-        { -1,  1 }, { 0,  1 }, { 1,  1 }  // 左下、下、右下
-            };
-
-            int maxContinuity = 0;
-            Drawing.Point startPoint = Drawing.Point.Empty;
-            List<Drawing.Point> longestLinePoints = new List<Drawing.Point>(); // 使用 Drawing.Point
-
-            HashSet<Drawing.Point> visited = new HashSet<Drawing.Point>();
-
-            for (int y = 0; y < binaryBitmap.Height; y++)
-            {
-                for (int x = 0; x < binaryBitmap.Width; x++)
-                {
-                    if (binaryBitmap.GetPixel(x, y) == white && !visited.Contains(new Drawing.Point(x, y)))
-                    {
-                        Queue<(Drawing.Point, int)> queue = new Queue<(Drawing.Point, int)>();
-                        queue.Enqueue((new Drawing.Point(x, y), -1));
-                        visited.Add(new Drawing.Point(x, y));
-
-                        List<Drawing.Point> currentLinePoints = new List<Drawing.Point>();
-                        currentLinePoints.Add(new Drawing.Point(x, y));
-
-                        int continuity = 0;
-
-                        while (queue.Count > 0)
-                        {
-                            var (current, prevDirection) = queue.Dequeue();
-                            continuity++;
-
-                            for (int i = 0; i < directions.GetLength(0); i++)
-                            {
-                                int newX = current.X + directions[i, 0];
-                                int newY = current.Y + directions[i, 1];
-
-                                if (newX >= 0 && newY >= 0 && newX < binaryBitmap.Width && newY < binaryBitmap.Height)
-                                {
-                                    Drawing.Point newPoint = new Drawing.Point(newX, newY);
-
-                                    if (binaryBitmap.GetPixel(newX, newY) == white && !visited.Contains(newPoint))
-                                    {
-                                        queue.Enqueue((newPoint, i));
-                                        visited.Add(newPoint);
-                                        currentLinePoints.Add(newPoint);
-                                    }
-                                }
-                            }
-                        }
-
-                        if (continuity > maxContinuity)
-                        {
-                            maxContinuity = continuity;
-                            startPoint = new Drawing.Point(x, y);
-                            longestLinePoints = new List<Drawing.Point>(currentLinePoints);
-                        }
-                    }
-                }
-            }
-
-            Bitmap outputBitmap = (Bitmap)binaryBitmap.Clone();
-            using (Drawing.Graphics g = Drawing.Graphics.FromImage(outputBitmap))
-            {
-                using (Drawing.Pen redPen = new Drawing.Pen(Drawing.Color.Red, 2))
-                {
-                    for (int i = 0; i < longestLinePoints.Count - 1; i++)
-                    {
-                        g.DrawLine(redPen, longestLinePoints[i], longestLinePoints[i + 1]);
-                    }
-                }
-            }
-
-            return outputBitmap;
+            // 將圖像轉換為灰階格式（8bpp）
+            Grayscale grayscaleFilter = new Grayscale(0.2126, 0.7152, 0.0722); // 標準灰階轉換
+            return grayscaleFilter.Apply(inputBitmap);
         }
+
     }
 
 }

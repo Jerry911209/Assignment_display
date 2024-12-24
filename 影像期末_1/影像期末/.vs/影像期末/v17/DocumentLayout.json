@@ -17,9 +17,22 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 1061,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAM4AAAAAAAAAAAAqwN8AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T02:21:49.94Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -29,20 +42,7 @@
               "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
               "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T15:35:44.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAIQAAAAAAAAAAAAAAMMAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T15:01:07.243Z",
+              "WhenOpened": "2024-12-23T02:21:47.817Z",
               "EditorCaption": ""
             }
           ]
