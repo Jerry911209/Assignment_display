@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\git\\assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\git\\assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,21 +24,9 @@
               "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
               "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAHcAAAAAAAAAAAAcwH8AAAAAAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAUwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T15:08:12.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
-              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-23T02:21:47.817Z",
+              "WhenOpened": "2025-01-05T16:50:05.896Z",
               "EditorCaption": ""
             }
           ]
