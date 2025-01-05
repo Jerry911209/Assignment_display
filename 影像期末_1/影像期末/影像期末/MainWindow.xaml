@@ -5,24 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:影像期末"
         mc:Ignorable="d"
-        Title="MainWindow" Height="682" Width="1116">
-    <Grid>
-       
+        Title="MainWindow" Height="682" Width="1505">
+    <Grid Margin="0,0,73,-64">
+
         <Border 
-            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="127,54,773,229" Width="216" Height="384
+            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="26,41,1190,306" Width="216" Height="384
             ">
             <MediaElement x:Name="before_media" LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Uniform" MediaOpened="BeforeMedia_MediaOpened"  />
         </Border>
         <Border 
-            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="395,60,505,223" Width="216" Height="384             ">
+            BorderBrush="Black" BorderThickness="1" CornerRadius="10"   Margin="922,53,294,294" Width="216" Height="384             ">
             <Image x:Name="after_image1" />
         </Border>
-        <Button x:Name="input_image" Content="導入影像" HorizontalAlignment="Left" Margin="706,77,0,0" VerticalAlignment="Top" Height="30" Width="71" Click="input_image_Click"/>
-        <Button x:Name="Start_image" Content="開始" HorizontalAlignment="Left" Margin="706,123,0,0" VerticalAlignment="Top" Width="71" Height="26" Click="Start_image_Click"/>
-        <Button x:Name="Retrieve_image" Content="擷取" HorizontalAlignment="Left" Margin="706,163,0,0" VerticalAlignment="Top" Height="28" Width="71" Click="Retrieve_image_Click"/>
+        <Button x:Name="input_image" Content="導入影像" HorizontalAlignment="Center" Margin="278,55,1084,0" VerticalAlignment="Top" Height="30" Width="70" Click="input_image_Click"/>
+        <Button x:Name="Start_image" Content="開始" HorizontalAlignment="Center" Margin="278,101,1084,0" VerticalAlignment="Top" Width="70" Height="26" Click="Start_image_Click"/>
+        <Button x:Name="Retrieve_image" Content="擷取" HorizontalAlignment="Center" Margin="278,141,1084,0" VerticalAlignment="Top" Height="28" Width="70" Click="Retrieve_image_Click"/>
         <Border 
-            BorderBrush="Black" BorderThickness="1"  CornerRadius="10"  Margin="826,60,74,223" Width="216" Height="384             ">
+            BorderBrush="Black" BorderThickness="1"  CornerRadius="10"  Margin="1249,54,-33,293" Width="216" Height="384             ">
             <Image x:Name="cut_image2"  />
+        </Border>
+        <Border 
+            BorderBrush="Black" BorderThickness="1"  CornerRadius="10"  Margin="665,54,551,293" Width="216" Height="384             ">
+            <Image x:Name="cut_image1"  />
+        </Border>
+        <Border 
+            BorderBrush="Black" BorderThickness="1"  CornerRadius="10"  Margin="395,54,821,293" Width="216" Height="384             ">
+            <Image x:Name="cut_image3"  />
         </Border>
     </Grid>
 </Window>

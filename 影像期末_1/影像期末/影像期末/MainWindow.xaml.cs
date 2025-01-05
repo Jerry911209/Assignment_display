@@ -42,6 +42,7 @@ namespace 影像期末
         string selectedFile = "";
         private DispatcherTimer frameCaptureTimer; // 用於定時捕捉畫面的計時器
         Bitmap originalBitmap;
+        public int sencond = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -103,7 +104,7 @@ namespace 影像期末
                 // 初始化計時器，用於定時捕捉畫面
                 frameCaptureTimer = new DispatcherTimer
                 {
-                    Interval = TimeSpan.FromMilliseconds(30) // 每 100 毫秒捕捉一次
+                    Interval = TimeSpan.FromMilliseconds(30) // 每 30 毫秒捕捉一次
 
                 };
                 frameCaptureTimer.Tick += CaptureFrame;
@@ -119,6 +120,7 @@ namespace 影像期末
             // 確保檔案存在
             if (File.Exists(selectedFile))
             {
+                sencond = 0;
                 // 播放影片
                 before_media.Position = TimeSpan.Zero;
                 before_media.Play();
@@ -135,6 +137,7 @@ namespace 影像期末
         private void Retrieve_image_Click(object sender, RoutedEventArgs e)
         {
             cut_image2.Source = after_image1.Source;
+
         }
         // 定時器回呼函數：捕捉畫面
         private void CaptureFrame(object sender, EventArgs e)
@@ -213,6 +216,8 @@ namespace 影像期末
         }
         private BitmapSource ApplyEdgeDetection(BitmapSource source)
         {
+            sencond++;
+
             // 將 BitmapSource 轉換為 System.Drawing.Bitmap
             Bitmap bitmap = BitmapFromSource(source);
 
@@ -248,6 +253,8 @@ namespace 影像期末
             // 對影像應用 Canny 邊緣檢測
             Bitmap edgeBitmap = cannyFilter.Apply(blurredBitmap);
 
+            cut_image3.Source = BitmapToSource(edgeBitmap);
+
             // 二值化影像
             Threshold binaryFilter = new Threshold(20);
             Bitmap binaryImage = binaryFilter.Apply(edgeBitmap);
@@ -264,7 +271,7 @@ namespace 影像期末
             short[,] crossKernel_3 = new short[,]
 {
     {0, 1, 0},
-    {1, 1, 1}, 
+    {1, 1, 1},
     {0, 1, 0,}
 };
 
@@ -278,15 +285,15 @@ namespace 影像期末
             // 創建侵蝕濾鏡，並指定結構元素
             Erosion erosionFilter = new Erosion(crossKernel);
             Bitmap erosionImage = erosionFilter.Apply(dilationImage);
-            
+
             Erosion erosionFilter_3 = new Erosion(crossKernel_3);
             erosionImage = erosionFilter_3.Apply(erosionImage);
-            //dilationImage = dilationFilter.Apply(erosionImage);
-            //dilationImage = dilationFilter.Apply(dilationImage);
-            //erosionImage = erosionFilter_3.Apply(dilationImage);
+            dilationImage = dilationFilter.Apply(erosionImage);
+            dilationImage = dilationFilter.Apply(dilationImage);
+            erosionImage = erosionFilter_3.Apply(dilationImage);
             //erosionImage = erosionFilter_3.Apply(dilationImage);
 
-            Bitmap resule = erosionImage;
+            Bitmap resule = dilationImage;
             //Bitmap resule = grayBitmap;
             //Bitmap CentralImage = ApplyCentralWeightedMedianFilter(erosionImage, 3);
 
@@ -295,8 +302,11 @@ namespace 影像期末
 
             // 11. 繪製連通區域（可選）
             Bitmap roiImage = DrawBlobsOnImage(resule, blobs);
-            
-            Bitmap after_image= grayBitmap;
+
+            cut_image1.Source = BitmapToSource(roiImage);
+
+
+            Bitmap after_image = grayBitmap;
 
             //12 在after_image中把連通區域內白色的piexl畫成紅色
 
@@ -306,11 +316,39 @@ namespace 影像期末
             {
                 g.DrawImage(erosionImage, new Drawing.Rectangle(0, 0, erosionImage.Width, erosionImage.Height));
             }
-
             // 第12步：將連通區域內的白色像素繪製為紅色
-            foreach (var blob in blobs)
+            if (sencond > 12 && sencond < 23)
             {
-                Drawing.Rectangle rect = blob.Rectangle;
+                try
+                {
+                    Blob thirdLargestBlob = blobs[3];
+
+                    Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
+
+                    // 獲取連通區域內像素，將白色像素繪製為紅色
+                    for (int y = rect.Top; y < rect.Bottom; y++)
+                    {
+                        for (int x = rect.Left; x < rect.Right; x++)
+                        {
+                            if (x >= 0 && x < erosionImage.Width && y >= 0 && y < erosionImage.Height)
+                            {
+                                Drawing.Color pixelColor = erosionImage.GetPixel(x, y);
+
+                                // 如果是白色像素，將其設為紅色
+                                if (pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
+                                {
+                                    resultImage.SetPixel(x, y, Drawing.Color.Red);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+            else if (sencond > 23 && sencond < 30) {
+                Blob thirdLargestBlob = blobs[2];
+
+                Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
 
                 // 獲取連通區域內像素，將白色像素繪製為紅色
                 for (int y = rect.Top; y < rect.Bottom; y++)
@@ -330,11 +368,61 @@ namespace 影像期末
                     }
                 }
             }
+            else if (sencond > 30 && sencond < 43)
+            {
+                Blob thirdLargestBlob = blobs[1];
+
+                Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
+
+                // 獲取連通區域內像素，將白色像素繪製為紅色
+                for (int y = rect.Top; y < rect.Bottom; y++)
+                {
+                    for (int x = rect.Left; x < rect.Right; x++)
+                    {
+                        if (x >= 0 && x < erosionImage.Width && y >= 0 && y < erosionImage.Height)
+                        {
+                            Drawing.Color pixelColor = erosionImage.GetPixel(x, y);
+
+                            // 如果是白色像素，將其設為紅色
+                            if (pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
+                            {
+                                resultImage.SetPixel(x, y, Drawing.Color.Red);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (sencond>43)
+            {
+                Drawing.Rectangle rect;
+                Blob largestBlob = blobs.OrderByDescending(blob => blob.Rectangle.Width * blob.Rectangle.Height).First();
+                rect = largestBlob.Rectangle;
+
+                // 獲取連通區域內像素，將白色像素繪製為紅色
+                for (int y = rect.Top; y < rect.Bottom; y++)
+                {
+                    for (int x = rect.Left; x < rect.Right; x++)
+                    {
+                        if (x >= 0 && x < erosionImage.Width && y >= 0 && y < erosionImage.Height)
+                        {
+                            Drawing.Color pixelColor = erosionImage.GetPixel(x, y);
+
+                            // 如果是白色像素，將其設為紅色
+                            if (pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
+                            {
+                                resultImage.SetPixel(x, y, Drawing.Color.Red);
+                            }
+                        }
+                    }
+                }
+            }
+            
+           
 
 
-            ////擷取ROI(大圖中間1/3)
-            //Drawing.Rectangle roi = GetCentralROI(erosionImage);
-            //Bitmap roiBitmap = CropBitmap(erosionImage, roi);
+            //////擷取ROI(大圖中間1/3)
+            //Drawing.Rectangle roi = GetCentralROI(resultImage);
+            //Bitmap roiBitmap = CropBitmap(resultImage, roi);
 
 
 
@@ -343,16 +431,16 @@ namespace 影像期末
         private System.Drawing.Rectangle GetCentralROI(Bitmap image)
         {
             // 寬度保持不變
-            int width = image.Width;
+            int width = image.Width / 3;
 
             // 高度為原本的 1/3
-            int height = image.Height / 3;
+            int height = image.Height;
 
             // 起始點 X 為 0（寬度不變，所以從最左邊開始）
-            int startX = 0;
+            int startX = image.Width / 3;
 
             // 起始點 Y 保證從圖像高度的中間部分開始
-            int startY = height;
+            int startY = 0;
 
             return new System.Drawing.Rectangle(startX, startY, width, height);
         }
@@ -367,39 +455,7 @@ namespace 影像期末
             return source.Clone(roi, source.PixelFormat);
         }
 
-        //遮罩帶回原圖
-        //private Bitmap ApplyBinaryMaskWithPreservation(Bitmap original, Bitmap binaryMask)
-        //{
-        //    // 確保兩個影像大小一致
-        //    if (original.Width != binaryMask.Width || original.Height != binaryMask.Height)
-        //        throw new ArgumentException("原圖和遮罩的尺寸必須相同。");
-
-        //    Bitmap result = new Bitmap(original.Width, original.Height);
-
-        //    // 使用像素級操作進行處理
-        //    for (int y = 0; y < original.Height; y++)
-        //    {
-        //        for (int x = 0; x < original.Width; x++)
-        //        {
-        //            // 取得原圖與遮罩的像素值
-        //            Drawing.Color originalColor = original.GetPixel(x, y);
-        //            Drawing.Color maskColor = binaryMask.GetPixel(x, y);
-
-        //            // 如果遮罩是白色，保留原圖細節；如果遮罩是黑色，保留原圖暗部
-        //            if (maskColor.R > 128) // 白色（亮部）
-        //            {
-        //                result.SetPixel(x, y, originalColor); // 保留原圖像素
-        //            }
-        //            else // 黑色（暗部）
-        //            {
-        //                // 保持暗部，將像素設為黑色
-        //                result.SetPixel(x, y, Drawing.Color.Black);
-        //            }
-        //        }
-        //    }
-        //    cut_image2.Source = BitmapToSource(result); ;
-        //    return result;
-        //}
+       
 
 
         // 拉普拉斯
@@ -674,22 +730,82 @@ namespace 影像期末
 
             using (Graphics g = Graphics.FromImage(resultImage))
             {
-                //if (blobs != null && blobs.Count > 0)
+                //if (sencond > 44)
                 //{
-                //    // 找到最大連通區域
-                //    Blob largestBlob = blobs.OrderByDescending(blob => blob.Rectangle.Width * blob.Rectangle.Height).First();
+                //    if (blobs != null && blobs.Count > 0)
+                //    {
+                //        // 找到最大連通區域
+                //        Blob largestBlob = blobs.OrderByDescending(blob => blob.Rectangle.Width * blob.Rectangle.Height).First();
 
-                //    // 繪製最大連通區域的矩形邊框
-                //    Drawing.Rectangle rect = largestBlob.Rectangle;
-                //    g.DrawRectangle(Pens.Red, rect);
+                //        // 繪製最大連通區域的矩形邊框
+                //        Drawing.Rectangle rect = largestBlob.Rectangle;
+                //        g.DrawRectangle(Pens.Red, rect);
+                //    }
                 //}
-                //all
-                foreach (var blob in blobs)
-                {
-                    // 繪製連通區域的矩形邊框
-                    Drawing.Rectangle rect = blob.Rectangle;
-                    g.DrawRectangle(Pens.Red, rect);
+                //else 
+                //{
+                    // 定義一組顏色集合
+                    Drawing.Color[] colors = { Drawing.Color.Red, Drawing.Color.Blue, Drawing.Color.Green, Drawing.Color.Orange, Drawing.Color.Purple, Drawing.Color.Yellow };
+
+                    int colorCount = colors.Length; // 顏色數量
+                    int blobIndex = 0; // 用於計算當前 blob 的索引
+
+                    foreach (var blob in blobs)
+                    {
+                        // 繪製連通區域的矩形邊框
+                        Drawing.Rectangle rect = blob.Rectangle;
+
+                        // 動態選擇顏色（使用餘數來循環顏色）
+                        Drawing.Color currentColor = colors[blobIndex % colorCount];
+
+                        // 創建畫筆
+                        using (Drawing.Pen pen = new Drawing.Pen(currentColor))
+                        {
+                            g.DrawRectangle(pen, rect);
+                        }
+
+                        blobIndex++; // 遞增索引
+                    //}
+
+                   
+                    //if (sencond > 15 && sencond < 23)
+                    //{
+                    //    try {
+                    //        Blob thirdLargestBlob = blobs[3];
+
+                    //        Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
+                    //        g.DrawRectangle(Pens.Red, rect);
+                    //    }
+                    //    catch { }
+                        
+                    //}
+                    //if (sencond>23&& sencond <30)
+                    //{
+                    //    Blob thirdLargestBlob = blobs[2];
+
+                    //    Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
+                    //    g.DrawRectangle(Pens.Red, rect);
+                    //}
+                    //if(sencond>30&&sencond<45)
+                    //{
+                    //    Blob thirdLargestBlob = blobs[1];
+
+                    //    Drawing.Rectangle rect = thirdLargestBlob.Rectangle;
+                    //    g.DrawRectangle(Pens.Red, rect);
+                    //}
+                   
                 }
+                    //if (blobs != null && blobs.Count > 0)
+                    //{
+                    //    // 找到最大連通區域
+                    //    Blob largestBlob = blobs.OrderByDescending(blob => blob.Rectangle.Width * blob.Rectangle.Height).First();
+
+                    //    // 繪製最大連通區域的矩形邊框
+                    //    Drawing.Rectangle rect = largestBlob.Rectangle;
+                    //    g.DrawRectangle(Pens.Red, rect);
+                    //}
+                    //all
+                   
             }
 
             return resultImage;
@@ -713,8 +829,10 @@ namespace 影像期末
             return croppedBitmap;
         }
 
+        private void Second_text_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-
+        }
     }
 
 }

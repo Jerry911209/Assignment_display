@@ -9,10 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\git\\assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|c:\\users\\jerry\\onedrive\\\u684C\u9762\\git\\assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{CAFF8ABF-F1E2-4FB2-B429-70B32946C858}|\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj|solutionrelative:\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,21 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1061,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "\u5F71\u50CF\u671F\u672B",
-              "DocumentMoniker": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
-              "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
-              "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
-              "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-31T03:56:31.546Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -45,9 +28,9 @@
               "RelativeDocumentMoniker": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\jerry\\OneDrive\\\u684C\u9762\\git\\Assignment_display\\\u5F71\u50CF\u671F\u672B_1\\\u5F71\u50CF\u671F\u672B\\\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
               "RelativeToolTip": "\u5F71\u50CF\u671F\u672B\\MainWindow.xaml.cs",
-              "ViewState": "AQIAALMAAAAAAAAAAAAkwFwAAABSAAAA",
+              "ViewState": "AQIAAHcAAAAAAAAAAAAcwH8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T02:21:49.94Z",
+              "WhenOpened": "2025-01-05T15:08:12.204Z",
               "EditorCaption": ""
             },
             {

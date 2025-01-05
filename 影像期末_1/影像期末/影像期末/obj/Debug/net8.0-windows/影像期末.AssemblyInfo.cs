@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("影像期末")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+281a57e5ba2784fbc7f680b8d7f70605d2f687f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae9e4d186632ebea6d92ac72d567cef88bdabd7a")]
 [assembly: System.Reflection.AssemblyProductAttribute("影像期末")]
 [assembly: System.Reflection.AssemblyTitleAttribute("影像期末")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
