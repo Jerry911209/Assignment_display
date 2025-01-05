@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using static AForge.Math.FourierTransform;
 using System.Diagnostics;
 using OpenCvSharp;
+using System.Runtime.InteropServices;
 
 //Process currentProcess = Process.GetCurrentProcess();
 //currentProcess.PriorityClass = ProcessPriorityClass.High;
@@ -102,7 +103,7 @@ namespace 影像期末
                 // 初始化計時器，用於定時捕捉畫面
                 frameCaptureTimer = new DispatcherTimer
                 {
-                    Interval = TimeSpan.FromMilliseconds(16) // 每 100 毫秒捕捉一次
+                    Interval = TimeSpan.FromMilliseconds(30) // 每 100 毫秒捕捉一次
 
                 };
                 frameCaptureTimer.Tick += CaptureFrame;
@@ -150,11 +151,18 @@ namespace 影像期末
             // 將 RenderTargetBitmap 轉換為 BitmapSource
             BitmapSource bitmapSource = renderTarget;
             originalBitmap = BitmapFromSource(bitmapSource);
-            // 使用影像處理方法執行邊緣檢測
+
+
+            // 使用影像處理判斷直線
             BitmapSource processedImage = ApplyEdgeDetection(bitmapSource);
 
             // 將處理後的影像顯示在 after_image1 控件中
             after_image1.Source = processedImage;
+
+            // 在 originalBitmap 上顯示 processedImage 紅色的地方
+            Bitmap highlightedBitmap = HighlightRedRegions(originalBitmap, processedImage);
+
+            cut_image2.Source = BitmapToSource(highlightedBitmap);
             //}
             //catch (Exception ex)
             //{
@@ -163,8 +171,46 @@ namespace 影像期末
             //    frameCaptureTimer?.Stop();
             //}
         }
+        private Bitmap HighlightRedRegions(Bitmap original, BitmapSource processed)
+        {
+            // 将 BitmapSource 转换为 Bitmap
+            Bitmap processedBitmap = BitmapFromSource(processed);
 
+            // 确保 originalBitmap 的格式支持 SetPixel
+            Bitmap writableOriginal = ConvertTo24bppBitmap(original);
 
+            // 遍历 processedBitmap 的像素
+            for (int y = 0; y < processedBitmap.Height; y++)
+            {
+                for (int x = 0; x < processedBitmap.Width; x++)
+                {
+                    // 获取像素颜色
+                    Drawing.Color processedColor = processedBitmap.GetPixel(x, y);
+
+                    // 如果是红色区域
+                    if (processedColor.R > 200 && processedColor.G < 50 && processedColor.B < 50)
+                    {
+                        // 在 writableOriginal 上标记红色
+                        writableOriginal.SetPixel(x, y, Drawing.Color.Red);
+                    }
+                }
+            }
+
+            return writableOriginal;
+        }
+        private Bitmap ConvertTo24bppBitmap(Bitmap source)
+        {
+            // 创建目标格式的 Bitmap
+            Bitmap target = new Bitmap(source.Width, source.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            // 使用 Graphics 将原始图像绘制到目标图像
+            using (Graphics g = Graphics.FromImage(target))
+            {
+                g.DrawImage(source, new Drawing.Rectangle(0, 0, target.Width, target.Height));
+            }
+
+            return target;
+        }
         private BitmapSource ApplyEdgeDetection(BitmapSource source)
         {
             // 將 BitmapSource 轉換為 System.Drawing.Bitmap
@@ -172,55 +218,126 @@ namespace 影像期末
 
 
             // 將影像轉換為灰階格式
-            Grayscale grayscaleFilter = new Grayscale(0.2126, 0.7152, 0.0722); // 使用標準灰階轉換係數
+            AForge.Imaging.Filters.Grayscale grayscaleFilter = new AForge.Imaging.Filters.Grayscale(0.2126, 0.7152, 0.0722); // 使用標準灰階轉換係數
             Bitmap grayBitmap = grayscaleFilter.Apply(bitmap);
 
             // 對比度增強(自適應值方圖)
-            HistogramEqualization histogramFilter = new HistogramEqualization();
+            AForge.Imaging.Filters.HistogramEqualization histogramFilter = new AForge.Imaging.Filters.HistogramEqualization();
             Bitmap contrastEnhancedBitmap = histogramFilter.Apply(grayBitmap);
             originalBitmap = contrastEnhancedBitmap;
-            // 高斯模糊
-            GaussianBlur blurFilter = new GaussianBlur(2, 5); // 減小核大小
-            Bitmap blurredBitmap = blurFilter.Apply(contrastEnhancedBitmap);
 
-            ////Sobel
-            //Edges edgeFilter = new Edges();
-            //Bitmap edgeEnhancedBitmap = edgeFilter.Apply(blurredBitmap);
+            // 初始化銳化過濾器
+            Sharpen sharpenFilter = new Sharpen();
+
+            // 應用銳化過濾器
+            Bitmap sharpenedImage = sharpenFilter.Apply(originalBitmap);
+            // 高斯模糊
+            AForge.Imaging.Filters.GaussianBlur blurFilter = new AForge.Imaging.Filters.GaussianBlur(1, 3); // 減小核大小
+            Bitmap blurredBitmap = blurFilter.Apply(sharpenedImage);
 
             //拉普拉絲邊緣
-            Bitmap edgeLaplacianBitmap = ApplyLaplacianFilter(blurredBitmap);
+            //Bitmap edgeLaplacianBitmap = ApplyLaplacianFilter(blurredBitmap);
 
-            // 使用中央加權中值法進一步處理
-            Bitmap centralWeightedBitmap = ApplyCentralWeightedMedianFilter(edgeLaplacianBitmap, 5);
+            // 初始化 Canny 邊緣檢測過濾器
+            AForge.Imaging.Filters.CannyEdgeDetector cannyFilter = new AForge.Imaging.Filters.CannyEdgeDetector
+            {
+                LowThreshold = 30,   // 設定低閾值
+                HighThreshold = 90  // 設定高閾值
+            };
 
-            //// 使用中值法進一步處理
-            //Bitmap medianProcessedBitmap = ApplyMedianFilter(edgeLaplacianBitmap, 3);
+            // 對影像應用 Canny 邊緣檢測
+            Bitmap edgeBitmap = cannyFilter.Apply(blurredBitmap);
 
-            // 使用自適應二值化
-            Bitmap adaptiveBitmap = ApplyAdaptiveThreshold(centralWeightedBitmap, 11, 2);
+            // 二值化影像
+            Threshold binaryFilter = new Threshold(20);
+            Bitmap binaryImage = binaryFilter.Apply(edgeBitmap);
 
-            //反轉
-            Bitmap invertedBitmap = InvertBrightness(adaptiveBitmap);
+            // 使用十字形核心進行膨脹
+            short[,] crossKernel = new short[,]
+{
+    {0, 0, 1, 0 ,0},
+    {0, 0, 1, 0 ,0},
+    {1, 1, 1, 1 ,1},
+    {0, 0, 1, 0 ,0},
+    {0, 0, 1, 0 ,0}
+};
+            short[,] crossKernel_3 = new short[,]
+{
+    {0, 1, 0},
+    {1, 1, 1}, 
+    {0, 1, 0,}
+};
+
+
+            // 創建膨脹濾鏡，並指定結構元素
+            Dilatation dilationFilter = new Dilatation(crossKernel_3);
+            Bitmap dilationImage = dilationFilter.Apply(binaryImage);
+            dilationImage = dilationFilter.Apply(dilationImage);
+
+
+            // 創建侵蝕濾鏡，並指定結構元素
+            Erosion erosionFilter = new Erosion(crossKernel);
+            Bitmap erosionImage = erosionFilter.Apply(dilationImage);
+            
+            Erosion erosionFilter_3 = new Erosion(crossKernel_3);
+            erosionImage = erosionFilter_3.Apply(erosionImage);
+            //dilationImage = dilationFilter.Apply(erosionImage);
+            //dilationImage = dilationFilter.Apply(dilationImage);
+            //erosionImage = erosionFilter_3.Apply(dilationImage);
+            //erosionImage = erosionFilter_3.Apply(dilationImage);
+
+            Bitmap resule = erosionImage;
+            //Bitmap resule = grayBitmap;
+            //Bitmap CentralImage = ApplyCentralWeightedMedianFilter(erosionImage, 3);
+
+            // 10.進行連通性分析
+            List<Blob> blobs = PerformBlobAnalysis(resule);
+
+            // 11. 繪製連通區域（可選）
+            Bitmap roiImage = DrawBlobsOnImage(resule, blobs);
+            
+            Bitmap after_image= grayBitmap;
+
+            //12 在after_image中把連通區域內白色的piexl畫成紅色
+
+            // 創建一個副本來存放結果影像（確保格式為 24bppRgb）
+            Bitmap resultImage = new Bitmap(erosionImage.Width, erosionImage.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            using (Graphics g = Graphics.FromImage(resultImage))
+            {
+                g.DrawImage(erosionImage, new Drawing.Rectangle(0, 0, erosionImage.Width, erosionImage.Height));
+            }
+
+            // 第12步：將連通區域內的白色像素繪製為紅色
+            foreach (var blob in blobs)
+            {
+                Drawing.Rectangle rect = blob.Rectangle;
+
+                // 獲取連通區域內像素，將白色像素繪製為紅色
+                for (int y = rect.Top; y < rect.Bottom; y++)
+                {
+                    for (int x = rect.Left; x < rect.Right; x++)
+                    {
+                        if (x >= 0 && x < erosionImage.Width && y >= 0 && y < erosionImage.Height)
+                        {
+                            Drawing.Color pixelColor = erosionImage.GetPixel(x, y);
+
+                            // 如果是白色像素，將其設為紅色
+                            if (pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
+                            {
+                                resultImage.SetPixel(x, y, Drawing.Color.Red);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            ////擷取ROI(大圖中間1/3)
+            //Drawing.Rectangle roi = GetCentralROI(erosionImage);
+            //Bitmap roiBitmap = CropBitmap(erosionImage, roi);
 
 
 
-            // 確保圖像為灰階格式
-            Bitmap grayscaleImage = ConvertToGrayscale(invertedBitmap);
-
-            // 使用膨脹濾鏡修復邊緣
-            Dilatation dilationFilter = new Dilatation();
-            Bitmap resultImage = dilationFilter.Apply(grayscaleImage);
-
-            //resultImage 當遮罩帶回原圖
-            // 將遮罩應用於原圖
-            //Bitmap resultBitmap = ApplyBinaryMaskWithPreservation(originalBitmap, resultImage);
-
-            //擷取ROI(大圖中間1/3)
-            Drawing.Rectangle roi = GetCentralROI(resultImage);
-            Bitmap roiBitmap = CropBitmap(resultImage, roi);
-            //roi中最大連通對應位置畫紅色
-
-            // 將結果轉回 BitmapSource
             return BitmapToSource(resultImage);
         }
         private System.Drawing.Rectangle GetCentralROI(Bitmap image)
@@ -530,9 +647,73 @@ namespace 影像期末
         private static Bitmap ConvertToGrayscale(Bitmap inputBitmap)
         {
             // 將圖像轉換為灰階格式（8bpp）
-            Grayscale grayscaleFilter = new Grayscale(0.2126, 0.7152, 0.0722); // 標準灰階轉換
+            AForge.Imaging.Filters.Grayscale grayscaleFilter = new AForge.Imaging.Filters.Grayscale(0.2126, 0.7152, 0.0722); // 標準灰階轉換
             return grayscaleFilter.Apply(inputBitmap);
         }
+        private List<Blob> PerformBlobAnalysis(Bitmap binaryImage)//連通判斷
+        {
+            BlobCounter blobCounter = new BlobCounter
+            {
+                FilterBlobs = true,
+                MinWidth = 5,  // 過濾最小寬度
+                MaxWidth = 100,
+                MinHeight = 20, // 過濾最小高度
+                ObjectsOrder = ObjectsOrder.Size // 按大小排序
+            };
+
+            blobCounter.ProcessImage(binaryImage);
+
+            // 獲取所有連通區域
+            Blob[] blobs = blobCounter.GetObjectsInformation();
+
+            return blobs.ToList();
+        }
+        private Bitmap DrawBlobsOnImage(Bitmap sourceImage, List<Blob> blobs)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage);
+
+            using (Graphics g = Graphics.FromImage(resultImage))
+            {
+                //if (blobs != null && blobs.Count > 0)
+                //{
+                //    // 找到最大連通區域
+                //    Blob largestBlob = blobs.OrderByDescending(blob => blob.Rectangle.Width * blob.Rectangle.Height).First();
+
+                //    // 繪製最大連通區域的矩形邊框
+                //    Drawing.Rectangle rect = largestBlob.Rectangle;
+                //    g.DrawRectangle(Pens.Red, rect);
+                //}
+                //all
+                foreach (var blob in blobs)
+                {
+                    // 繪製連通區域的矩形邊框
+                    Drawing.Rectangle rect = blob.Rectangle;
+                    g.DrawRectangle(Pens.Red, rect);
+                }
+            }
+
+            return resultImage;
+        }
+
+        private Bitmap CropBitmap_blob(Bitmap source, Drawing.Rectangle rect)
+        {
+            // 確保裁剪範圍在原始影像內
+            rect.Intersect(new Drawing.Rectangle(0, 0, source.Width, source.Height));
+
+            if (rect.Width <= 0 || rect.Height <= 0)
+                return null; // 無效範圍返回 null
+
+            Bitmap croppedBitmap = new Bitmap(rect.Width, rect.Height);
+
+            using (Graphics g = Graphics.FromImage(croppedBitmap))
+            {
+                g.DrawImage(source, 0, 0, rect, GraphicsUnit.Pixel);
+            }
+
+            return croppedBitmap;
+        }
+
+
 
     }
 

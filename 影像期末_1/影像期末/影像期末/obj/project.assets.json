@@ -637,7 +637,8 @@
       "Accord.Imaging >= 3.8.0",
       "OpenCvSharp4 >= 4.10.0.20241108",
       "OpenCvSharp4.Extensions >= 4.10.0.20241108",
-      "OpenCvSharp4.Windows >= 4.10.0.20241108"
+      "OpenCvSharp4.Windows >= 4.10.0.20241108",
+      "OpenCvSharp4.runtime.win >= 4.10.0.20241108"
     ]
   },
   "packageFolders": {
@@ -719,6 +720,10 @@
             "version": "[4.10.0.20241108, )"
           },
           "OpenCvSharp4.Windows": {
+            "target": "Package",
+            "version": "[4.10.0.20241108, )"
+          },
+          "OpenCvSharp4.runtime.win": {
             "target": "Package",
             "version": "[4.10.0.20241108, )"
           }
